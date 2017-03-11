@@ -6,8 +6,8 @@ var cellWidth = 80 //Width of each cell rectangle
 
 const chessBoard = new ChessBoard(Snap("#svg"), boardSize, cellWidth)
 chessBoard.drawBoard()
-drawQueenPuzzle(chessBoard)
-
+//drawQueenPuzzle(chessBoard)
+failSolution(chessBoard)
 
 function demoChessBoard(chessBoard) {
   chessBoard.placeNewPieceAt('QB', 3, 2)
@@ -27,6 +27,12 @@ function demoChessBoard(chessBoard) {
     chessBoard.placeNewPieceAt('RB', 0, 3)
     chessBoard.movePiece(2, 2, 7, 7)
   }, 1000)
+}
+
+function failSolution(chessBoard) {
+  chessBoard.placeNewPieceAt('QB', 0, 0)
+  chessBoard.placeNewPieceAt('QB', 1, 3)
+  chessBoard.placeNewPieceAt('QB', 2, 1)
 }
 
 function drawQueenPuzzle(chessBoard){
