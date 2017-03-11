@@ -224,6 +224,25 @@ class ChessBoard {
     })
   }
 
+  /**
+   * Draw dash line
+   * @param fromRow
+   * @param fromCol
+   * @param toRow
+   * @param toCol
+   */
+  drawLine(fromRow, fromCol, toRow, toCol) {
+    let [cellXFrom, cellYFrom] = this.computeCellCoordinate(fromRow, fromCol)
+    let [cellXTo, cellYTo] = this.computeCellCoordinate(toRow, toCol)
+    let cellHalfWidth = this.cellWidth / 2
+    let line = this.snap.line(cellXFrom + cellHalfWidth, cellYFrom + cellHalfWidth, cellXTo + cellHalfWidth, cellYTo + cellHalfWidth)
+    line.attr({
+      stroke: "#0000AA",
+      strokeWidth: 1,
+      'stroke-dasharray': "5, 5"
+    })
+  }
+
   //layoutChessBoard()
 
 

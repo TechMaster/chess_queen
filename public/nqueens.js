@@ -21,6 +21,8 @@ chessBoard.flashCell(3, 4)*/
 
 chessBoard.showDangerousPosition(2, 7)
 
+chessBoard.drawLine(0,0, 6,6)
+
 /*
 //After 2 seconds remove some pieces then add RockBlack
 setTimeout(function () {
