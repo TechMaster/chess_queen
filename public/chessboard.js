@@ -15,10 +15,13 @@ class ChessBoard {
 
     //----------
     this.leftMargin = 20
-    this.topMargin = 20
+    this.topMargin = 35
 
   }
 
+  /**
+   * Draw chessboard with vertical and horizontal markers
+   */
   drawBoard() {
     const black = "#b58863"
     const white = "#f0d9b5"
@@ -42,25 +45,51 @@ class ChessBoard {
           strokeWidth: 1
         });
 
+        this.drawMarker(rowIndex, colIndex)
 
-        if (colIndex === 0) {  //draw left chess board marker 8 down to 1
-          let text = (this.boardSize - rowIndex).toString()
-          let [leftMarkerX, leftMarkerY] = this.computeLeftMarkerCoordinate(rowIndex)
-          let marker = this.snap.text(leftMarkerX, leftMarkerY, text);
-          marker.attr({
-            class: 'Lmarker'
-          })
-        }
-
-        if (rowIndex === this.boardSize - 1) { //draw bottom chess board marker
-          let text = String.fromCharCode(65 + colIndex)
-          let [bottomMarkerX, bottomMarkerY] = this.computeBottomMarkerCoordinate(colIndex)
-          let marker = this.snap.text(bottomMarkerX, bottomMarkerY, text);
-          marker.attr({
-            class: 'Bmarker'
-          })
-        }
       }
+    }
+  }
+
+  drawMarker(rowIndex, colIndex) {
+    //draw left vertical marker 0, 1, 2, 3, ....
+    if (colIndex === 0) {
+      let text = rowIndex.toString()
+      let [leftMarkerX, leftMarkerY] = this.computeLeftMarkerCoordinate(rowIndex)
+      let leftMarker = this.snap.text(leftMarkerX, leftMarkerY, text);
+      leftMarker.attr({
+        class: 'Lmarker'
+      })
+    }
+
+    //draw right vertical marker
+    if (colIndex === this.boardSize - 1) {
+      let text = (this.boardSize - rowIndex).toString()
+      let [rightMarkerX, rightMarkerY] = this.computeRightMarkerCoordinate(rowIndex)
+      let rightMarker = this.snap.text(rightMarkerX, rightMarkerY, text);
+      rightMarker.attr({
+        class: 'Rmarker'
+      })
+    }
+
+    //draw top horizontal marker
+    if (rowIndex === 0) {
+      let text = colIndex.toString()
+      let [topMarkerX, topMarkerY] = this.computeTopMarkerCoordinate(colIndex)
+      let topMarker = this.snap.text(topMarkerX, topMarkerY, text);
+      topMarker.attr({
+        class: 'Tmarker'
+      })
+    }
+
+    //draw bottom horizontal marker
+    if (rowIndex === this.boardSize - 1) {
+      let text = String.fromCharCode(65 + colIndex)
+      let [bottomMarkerX, bottomMarkerY] = this.computeBottomMarkerCoordinate(colIndex)
+      let bottomMarker = this.snap.text(bottomMarkerX, bottomMarkerY, text);
+      bottomMarker.attr({
+        class: 'Bmarker'
+      })
     }
   }
 
@@ -70,6 +99,14 @@ class ChessBoard {
 
   computeLeftMarkerCoordinate(rowIndex) {
     return [0, this.topMargin + (rowIndex + 0.55) * this.cellWidth]
+  }
+
+  computeRightMarkerCoordinate(rowIndex) {
+    return [this.leftMargin + this.boardSize * this.cellWidth + 15, this.topMargin + (rowIndex + 0.55) * this.cellWidth]
+  }
+
+  computeTopMarkerCoordinate(colIndex) {
+    return [this.leftMargin + (colIndex + 0.4) * this.cellWidth, 20]
   }
 
   computeBottomMarkerCoordinate(colIndex) {
@@ -208,7 +245,7 @@ class ChessBoard {
     this.highlightCell(rowIndex, colIndex, function (cell) {
       originalFillColor = cell.attr('fill')
       function animateFill() {
-        if (count > 0 && count % 2 ===1) {
+        if (count > 0 && count % 2 === 1) {
           cell.animate({fill: '#FF0000'}, 300, mina.linear, animateFill)
         } else {
           cell.animate({fill: originalFillColor}, 300, mina.linear, animateFill)
@@ -241,7 +278,6 @@ class ChessBoard {
   }
 
   //layoutChessBoard()
-
 
 
   //showGoodPosition()

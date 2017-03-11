@@ -1,7 +1,7 @@
 /**
  * Created by techmaster on 3/11/17.
  */
-var boardSize = 8 //Number of cell at each size of board
+var boardSize = 4 //Number of cell at each size of board
 var cellWidth = 80 //Width of each cell rectangle
 
 const chessBoard = new ChessBoard(Snap("#svg"), boardSize, cellWidth)

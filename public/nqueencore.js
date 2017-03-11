@@ -11,7 +11,8 @@ function queenPuzzle(rows, columns) {
   }
 }
 
-function addQueen(newRow, columns, prevSolution) {
+function addQueen(newRow, columns) {
+  console.log('addQueen: ', newRow, columns)
   var newSolutions = [];
   var prev = queenPuzzle(newRow, columns);
   for (var i = 0; i < prev.length; i++) {
@@ -34,3 +35,5 @@ function hasConflict(newRow, newColumn, solution) {
   }
   return false;
 }
+
+console.log(queenPuzzle(4, 4))
