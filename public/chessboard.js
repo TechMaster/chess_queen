@@ -1,6 +1,3 @@
-var boardSize = 8 //Number of cell at each size of board
-var cellWidth = 80 //Width of each cell rectangle
-
 class ChessBoard {
   constructor(svg, boardSize, cellWidth) {
     this.boardSize = boardSize
