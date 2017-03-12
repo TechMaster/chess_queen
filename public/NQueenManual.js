@@ -55,7 +55,7 @@ class NQueenManual {
       //Trong mỗi solution -> duyệt qua từng cell trong dòng
       //Ứng với mỗi cell -> duyệt từng quân hậu trong solution
 
-      let currentSolution =  self.solutions[self.solIndex]
+      let currentSolution = self.solutions[self.solIndex]
 
 
       self.queenIndexInSol++  //move to next queen in current solution
@@ -110,28 +110,48 @@ class NQueenManual {
   scanNextRow(callback) {
     if (this.row === 0) return
 
+    let self = this
     let solution = this.solutions[this.solIndex]  //Get solution
     let currentQueenInSolution = solution[this.queenIndexInSol] //equivalent to col
 
     //Display all queen in this solution
-    for (let i=0; i < solution.length; i++) {
+    for (let i = 0; i < solution.length; i++) {
       this.chessBoard.placeNewPieceAt('QB', i, solution[i])
     }
 
-    //Check conflict each cell in row against current solution
-    this.chessBoard.placeNewPieceAt('QB', this.row, this.col)
-
-
-    this.checkConflict(solution, this.row)
-
-
+    setTimeout(function () {
+      self.checkConflict(solution, self.row)
+    }, 400)
 
 
   }
 
 
+  checkConflict(solution, row) {
+    //Quet tung cell mot
+    let col = 0
+    let self = this
+    testCell(col)
 
-  checkConflict(solution, row, col) {
+    function testCell(col) {
+      self.chessBoard.placeNewPieceAt('QB', row, col)
+      for (let i = 0; i < solution.length; i++) {
+        if (solution[i] === col ||
+          solution[i] + i === col + row ||
+          solution[i] - i === col - row) {
+
+          let line = self.chessBoard.drawLine(i, solution[i], row, col)
+
+          setTimeout(function () {
+            self.chessBoard.removePiece(row, col)
+            line.remove()
+            self.chessBoard.dimCell(row, col)
+          }, 400)
+        }
+
+      }
+
+    }
 
   }
 

@@ -299,10 +299,11 @@ class ChessBoard {
     let cellHalfWidth = this.cellWidth / 2
     let line = this.snap.line(cellXFrom + cellHalfWidth, cellYFrom + cellHalfWidth, cellXTo + cellHalfWidth, cellYTo + cellHalfWidth)
     line.attr({
-      stroke: "#0000AA",
-      strokeWidth: 1,
+      stroke: "#AA0000",
+      strokeWidth: 2,
       'stroke-dasharray': "5, 5"
     })
+    return line
   }
 
   //layoutChessBoard()
