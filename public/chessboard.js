@@ -228,6 +228,7 @@ class ChessBoard {
    * Generic function to highlight a cell using high light function
    * @param rowIndex
    * @param colIndex
+   * @param highlighFunc take cell as input parameter
    */
   highlightCell(rowIndex, colIndex, highlightFunc) {
     let cell = this.snap.select(`#c${rowIndex}-${colIndex}`)
@@ -240,9 +241,9 @@ class ChessBoard {
    * @param colIndex
    */
   flashCell(rowIndex, colIndex) {
-    this.highlightCell(3, 4, function (cell) {
-      cell.animate({'fill-opacity': 0.0}, 300, mina.linear, function () {
-        cell.animate({'fill-opacity': 1.0}, 300, mina.linear)
+    this.highlightCell(rowIndex, colIndex, function (cell) {
+      cell.animate({'fill-opacity': 0.0}, 400, mina.linear, function () {
+        cell.animate({'fill-opacity': 1.0}, 400, mina.linear)
       })
     })
   }
@@ -253,7 +254,7 @@ class ChessBoard {
    * @param colIndex
    */
   dimCell(rowIndex, colIndex) {
-    this.highlightCell(6, 6, function (cell) {
+    this.highlightCell(rowIndex, colIndex, function (cell) {
       cell.animate({'fill-opacity': 0.0}, 300, mina.linear, function () {
         cell.animate({'fill-opacity': 1.0, fill: "#666666"}, 300, mina.linear)
       })

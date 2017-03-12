@@ -12,6 +12,8 @@
 
     <link href="/public/main.css" rel="stylesheet">
 
+
+
 </head>
 
 <body>
@@ -20,11 +22,11 @@
         <div>
             <label>Select board size
                 <select class="input-large" id="selectBoardSize">
-                    <option>4</option>
+                    <option selected="selected">4</option>
                     <option>5</option>
                     <option>6</option>
                     <option>7</option>
-                    <option selected="selected">8</option>
+                    <option>8</option>
                 </select>
             </label>
         </div>
@@ -35,7 +37,7 @@
             <input type="radio" name="runMode" id="batch" value="Batch"> Batch NQueen
         </label>
         <label class="radio-inline">
-            <input type="radio" name="runMode" id="manual" value="Manual"> Manual NQueen
+            <input type="radio" name="runMode" id="manual" value="Manual" checked> Manual NQueen
         </label>
     </div>
     <div class="col-md-2">
@@ -61,8 +63,11 @@
         crossorigin="anonymous"></script>
 
 <!-- My code -->
+
 <script src="/public/chessboard.js"></script>
 <script src="/public/nqueen.js"></script>
+<script src="/public/NQueenBatch.js"></script>
+<script src="/public/NQueenManual.js"></script>
 <script src="/public/main.js"></script>
 </body>
 </html>
