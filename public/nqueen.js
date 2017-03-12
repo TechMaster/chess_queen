@@ -2,11 +2,11 @@
  * Written by cuong@techmaster.vn
  */
 class NQueen {
-  constructor(N) {
-    this.N = N //Board size
+  constructor() {
   }
 
-  solve() {
+  solve(N) {
+    this.N = N
     let solutions = []
     for (let row = 0; row < this.N; row++) {
       solutions = this.scanRow(row, solutions)
@@ -61,8 +61,3 @@ class NQueen {
   }
 
 }
-
-
-let queenSolver = new NQueen(5)
-
-console.log(queenSolver.solve())

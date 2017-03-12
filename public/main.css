@@ -1,0 +1,14 @@
+
+body {
+    margin:10px 10px 10px 10px;
+}
+
+input[type="radio"] {
+  margin-left: 20px;
+}
+
+@media (max-width: 980px) {
+    body {
+        padding-top: 0;
+    }
+}

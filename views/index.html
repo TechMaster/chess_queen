@@ -1,13 +1,68 @@
 <html>
-  <head>
+<head>
     <title>Solve N-Queens problem</title>
     <script src="/public/snap.svg-min.js"></script>
-  </head>
-  <body>
-    <svg id="svg" width="1000" height="1000"></svg>
-    <script src="/public/chessboard.js"></script>
-    <script src="/public/nqueencore.js"></script>
-    <script src="/public/nqueeninteractive.js"></script>
-    <script src="/public/nqueens.js"></script>
-  </body>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link href="/public/main.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <label>Select board size
+                <select class="input-large" id="selectBoardSize">
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option selected="selected">8</option>
+                </select>
+            </label>
+        </div>
+        <label class="radio-inline">
+            <input type="radio" name="runMode" id="demo" value="Demo" checked=""> Demo
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="runMode" id="batch" value="Batch"> Batch NQueen
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="runMode" id="manual" value="Manual"> Manual NQueen
+        </label>
+    </div>
+    <div class="col-md-2">
+        <input class="btn" type="button" value="RUN" onclick="runSimulation()">
+    </div>
+</div>
+<svg id="svg" width="1000" height="1000"></svg>
+
+<div class="row">
+    <div class="col-md-4" id="buttonGroup">
+    </div>
+</div>
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+<!-- My code -->
+<script src="/public/chessboard.js"></script>
+<script src="/public/nqueen.js"></script>
+<script src="/public/main.js"></script>
+</body>
 </html>

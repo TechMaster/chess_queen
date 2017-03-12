@@ -213,15 +213,20 @@ class ChessBoard {
   /**
    * Clear all board
    */
-  clearEverything() {
-    /*this.removeAllPieces()
+  clearEverything(){
+    //Snap.selectAll('rect').remove()
+    this.removeAllPieces()
     Snap.selectAll('.Lmarker').remove()
     Snap.selectAll('.Rmarker').remove()
     Snap.selectAll('.Tmarker').remove()
     Snap.selectAll('.Bmarker').remove()
     Snap.select('desc').remove()
-    Snap.select('defs').remove()*/
-    this.snap.paper.remove()
+    Snap.select('defs').remove()
+    Snap.selectAll('rect').remove()
+
+
+
+
   }
 
   /**
