@@ -127,31 +127,72 @@ class NQueenManual {
   }
 
 
-  checkConflict(solution, row) {
+  /**
+   * Check conflict in all cells of row for every solution
+   * @param solution
+   * @param row
+   * @param callback run when reach last cell in row
+   */
+  checkConflict(solution, row, callback) {
     //Quet tung cell mot
     let col = 0
     let self = this
-    testCell(col)
+    testCell(col, function(newCol, result){
+      if (result) {
+        console.log('Good cell', row, newCol)
+        self.tempSolutions.push(solution.concat(newCol))
+        console.log(self.tempSolutions)
+      }
 
-    function testCell(col) {
-      self.chessBoard.placeNewPieceAt('QB', row, col)
+      if (newCol === self.N-1) {
+        console.log('For this solution, reach last cell in row')
+        callback()
+      }
+
+    })
+
+
+
+    /**
+     * Run callback if no new queen conflicts
+     * @param col
+     * @param callback: has two parameters
+     */
+    function testCell(col, callback) {
+      self.chessBoard.placeNewPieceAt('QB', row, col) //try to place queen at row, col
+
       for (let i = 0; i < solution.length; i++) {
         if (solution[i] === col ||
           solution[i] + i === col + row ||
           solution[i] - i === col - row) {
 
+          //new queen conflicts
           let line = self.chessBoard.drawLine(i, solution[i], row, col)
 
           setTimeout(function () {
             self.chessBoard.removePiece(row, col)
             line.remove()
-            self.chessBoard.dimCell(row, col)
+            self.chessBoard.dimCell(row, col, function () {
+              callback(col, false)
+              let nextCol = col + 1
+              if (nextCol < self.N) {
+                testCell(nextCol, callback)
+              }
+
+            })
           }, 400)
+        } else { //no conflict
+          callback(col, true)
+          let nextCol = col + 1
+          if (nextCol < self.N) {
+            testCell(nextCol, callback)
+          }
         }
 
       }
 
     }
+
 
   }
 

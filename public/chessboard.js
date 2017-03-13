@@ -253,10 +253,12 @@ class ChessBoard {
    * @param rowIndex
    * @param colIndex
    */
-  dimCell(rowIndex, colIndex) {
+  dimCell(rowIndex, colIndex, callback) {
     this.highlightCell(rowIndex, colIndex, function (cell) {
       cell.animate({'fill-opacity': 0.0}, 300, mina.linear, function () {
-        cell.animate({'fill-opacity': 1.0, fill: "#666666"}, 300, mina.linear)
+        cell.animate({'fill-opacity': 1.0, fill: "#666666"}, 300, mina.linear, function () {
+          if (callback) callback()
+        })
       })
     })
   }
