@@ -50,33 +50,8 @@ class NQueenManual {
     })
 
 
-    this.scanNextRow(function () {
-      //Trên mỗi dòng -> duyệt qua từng solution.
-      //Trong mỗi solution -> duyệt qua từng cell trong dòng
-      //Ứng với mỗi cell -> duyệt từng quân hậu trong solution
+    this.scanRow(function () {
 
-      let currentSolution = self.solutions[self.solIndex]
-
-
-      self.queenIndexInSol++  //move to next queen in current solution
-
-      //duyệt đến quân hậu cuối trong một solution
-      if (self.queenIndexInSol === currentSolution.length) {
-        self.col = 0 //Reset
-      }
-
-
-      //duyệt ô cuối cùng trong dòng cần kiểm tra
-      if (self.col == self.N) {
-        self.solIndex++ //move to next solution to check
-      }
-
-      //duyệt đến solution cuối cùng
-      if (self.solIndex === self.solutions.length) {
-        self.solIndex = 0
-        self.row++ //chuyển sang dòng tiếp theo
-        return
-      }
     })
   }
 
@@ -107,22 +82,42 @@ class NQueenManual {
    * Examine solutions[solIndex]
    * @param callback
    */
-  scanNextRow(callback) {
+  scanRow(callback) {
     if (this.row === 0) return
 
-    let self = this
-    let solution = this.solutions[this.solIndex]  //Get solution
-    let currentQueenInSolution = solution[this.queenIndexInSol] //equivalent to col
-
-    //Display all queen in this solution
-    for (let i = 0; i < solution.length; i++) {
-      this.chessBoard.placeNewPieceAt('QB', i, solution[i])
+    if (this.row === this.N) {
+      console.log('End of algorithm')
     }
+    let self = this
 
-    setTimeout(function () {
-      self.checkConflict(solution, self.row)
-    }, 400)
+    scanSolution(this.solIndex, function() {
+      self.solutions = self.tempSolutions
+      self.tempSolutions = []
+      self.row = self.row + 1
+      self.solIndex = 0
+      self.chessBoard.removeAllPieces()
+    })
 
+    function scanSolution(solutionIndex, endSolutionCallBack) {
+      if (solutionIndex === self.solutions.length) {
+        endSolutionCallBack()
+      }
+
+      let solution = self.solutions[solutionIndex]  //Get solution
+      //let currentQueenInSolution = solution[self.queenIndexInSol] //equivalent to col
+
+      //Display all queen in this solution
+      for (let i = 0; i < solution.length; i++) {
+        self.chessBoard.placeNewPieceAt('QB', i, solution[i])
+      }
+
+      setTimeout(function () {
+        self.checkConflict(solution, self.row, function () {
+          //endCellCallback
+          scanSolution(solutionIndex+1, endSolutionCallBack)
+        })
+      }, 400)
+    }
 
   }
 
@@ -133,24 +128,23 @@ class NQueenManual {
    * @param row
    * @param callback run when reach last cell in row
    */
-  checkConflict(solution, row, callback) {
+  checkConflict(solution, row, endCellCallback) {
     //Quet tung cell mot
     let col = 0
     let self = this
-    testCell(col, function(newCol, result){
+    testCell(col, function (newCol, result) {
       if (result) {
         console.log('Good cell', row, newCol)
-        self.tempSolutions.push(solution.concat(newCol))
+        self.tempSolutions.push(solution.concat(newCol))  //Add new row to temp solution
         console.log(self.tempSolutions)
       }
 
-      if (newCol === self.N-1) {
+      if (newCol === self.N - 1) {
         console.log('For this solution, reach last cell in row')
-        callback()
+        endCellCallback()
       }
 
     })
-
 
 
     /**
